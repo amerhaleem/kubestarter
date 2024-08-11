@@ -8,15 +8,15 @@ This guide outlines the steps needed to set up a Kubernetes cluster using kubead
 - sudo privileges
 - Internet access
 - t2.medium instance type or higher
+-----------------------------------------
 
----
 
 ## AWS Setup
 
 - Make sure your all instance are in same **Security group**.
 - Expose port **6443** in the **Security group**, so that worker nodes can join the cluster.
 
----
+-----------------------------------------
 
 ## Execute on Both "Master" & "Worker Node"
 
@@ -29,7 +29,7 @@ echo "deb [signed-by=/etc/apt/keyrings/kubernetes-apt-keyring.gpg] https://pkgs.
 curl -fsSL https://pkgs.k8s.io/core:/stable:/v1.28/deb/Release.key | sudo gpg --dearmor -o /etc/apt/keyrings/kubernetes-apt-keyring.gpg
 sudo apt update
 sudo apt install -y kubelet kubeadm kubectl
-
+-----------------------------------------------------------
 ## Execute ONLY on "Master Node"
 
 sudo kubeadm init
@@ -39,7 +39,7 @@ sudo cp -i /etc/kubernetes/admin.conf "$HOME"/.kube/config
 sudo chown "$(id -u)":"$(id -g)" "$HOME"/.kube/config
 
 
-# Network Plugin = Weave
+# Network Plugin = Weave (Services can communicate with each other)
 
 kubectl apply -f https://github.com/weaveworks/weave/releases/download/v2.8.1/weave-daemonset-k8s.yaml.
 
